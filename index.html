@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071b22">
+<title>Private Poker</title>
+<meta name="description" content="">
+<style>
+:root{
+  --night:#07191f; --deep:#0b2830; --teal:#16414a;
+  --copper:#e17a4b; --ivory:#f3eee4; --muted:#9eb0ae;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--night)}
+body{font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
+a{-webkit-tap-highlight-color:transparent}
+.stage{
+  position:relative;isolation:isolate;min-height:100svh;min-height:100dvh;
+  overflow:hidden;display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(ellipse at 50% 43%,rgba(34,99,105,.45) 0%,rgba(9,43,50,.25) 31%,transparent 62%),
+    radial-gradient(ellipse at 84% 12%,rgba(225,122,75,.15),transparent 32%),
+    linear-gradient(145deg,#0d3038 0%,#071b22 46%,#050e14 100%);
+}
+.stage:before{
+  content:"";position:absolute;inset:0;z-index:-1;opacity:.24;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E");
+  mix-blend-mode:soft-light
+}
+.horizon{
+  position:absolute;left:-15%;right:-15%;top:53%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(179,210,206,.22),rgba(225,122,75,.55),rgba(179,210,206,.18),transparent);
+  transform:rotate(-11deg);filter:blur(.4px)
+}
+.glow{
+  position:absolute;width:min(95vw,900px);aspect-ratio:1;border-radius:50%;
+  left:50%;top:42%;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(30,112,119,.2),rgba(12,48,55,.08) 43%,transparent 69%);
+  filter:blur(12px)
+}
+/* A sculptural, light-catching ribbon: an abstract signature rather than poker clip-art. */
+.sculpture{
+  position:absolute;width:min(78vw,690px);height:min(78vw,690px);
+  left:50%;top:43%;transform:translate(-50%,-50%) rotate(-18deg);
+  filter:drop-shadow(0 38px 42px rgba(0,0,0,.48));
+}
+.sculpture svg{width:100%;height:100%;overflow:visible}
+.reflection{
+  position:absolute;left:50%;top:69%;width:min(78vw,720px);height:18vh;
+  transform:translateX(-50%) perspective(500px) rotateX(65deg);
+  background:radial-gradient(ellipse,rgba(225,122,75,.19),rgba(39,116,120,.12) 30%,transparent 70%);
+  filter:blur(17px);opacity:.85
+}
+.platform{
+  position:absolute;left:50%;top:68%;width:min(112vw,1050px);height:19vh;
+  transform:translateX(-50%) perspective(700px) rotateX(62deg);
+  border-radius:50%;border:1px solid rgba(185,211,207,.19);
+  background:linear-gradient(155deg,rgba(26,67,73,.82),rgba(4,17,23,.94) 62%);
+  box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 1px rgba(255,255,255,.18),inset 0 -22px 40px rgba(0,0,0,.4)
+}
+.platform:before{
+  content:"";position:absolute;inset:9%;border-radius:50%;
+  border:1px solid rgba(225,122,75,.32);box-shadow:0 0 28px rgba(225,122,75,.1)
+}
+.edge-light{
+  position:absolute;width:65vw;height:2px;left:50%;top:61%;
+  transform:translateX(-50%) rotate(-8deg);
+  background:linear-gradient(90deg,transparent,rgba(225,122,75,.9),rgba(243,238,228,.7),transparent);
+  box-shadow:0 0 18px rgba(225,122,75,.55)
+}
+.grain-line{
+  position:absolute;left:7%;top:13%;width:1px;height:22vh;
+  background:linear-gradient(transparent,rgba(243,238,228,.38),transparent)
+}
+.grain-line:after{
+  content:"";position:absolute;left:-3px;top:0;width:7px;height:7px;border-radius:50%;
+  background:var(--copper);box-shadow:0 0 16px var(--copper)
+}
+.content{
+  position:relative;z-index:4;width:min(100% - 40px,1120px);min-height:100svh;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:0 0 max(7vh,54px)
+}
+.cta{
+  display:inline-flex;align-items:center;justify-content:center;gap:20px;
+  width:min(340px,100%);min-height:66px;padding:0 30px;
+  color:#101b1d;text-decoration:none;text-transform:uppercase;
+  font-size:14px;font-weight:800;letter-spacing:.14em;
+  background:linear-gradient(110deg,#f0b18b 0%,#e17a4b 48%,#c75d3c 100%);
+  border:1px solid rgba(255,222,199,.8);border-radius:3px;
+  box-shadow:0 12px 40px rgba(0,0,0,.34),0 0 35px rgba(225,122,75,.17),inset 0 1px rgba(255,255,255,.55);
+  transition:transform .2s ease,filter .2s ease
+}
+.cta:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.cta:active{transform:translateY(0) scale(.99)}
+.arrow{font-size:22px;font-weight:400;line-height:1}
+@media(min-width:760px){
+  .sculpture{width:min(58vw,710px);height:min(58vw,710px);top:43%;left:56%}
+  .platform{top:69%;height:22vh}
+  .content{justify-content:flex-end;padding-bottom:7vh}
+  .cta{margin-right:2vw}
+}
+@media(max-width:520px){
+  .sculpture{width:112vw;height:112vw;top:43%;left:51%}
+  .platform{width:145vw;height:17vh;top:67%}
+  .reflection{top:68%;width:110vw}
+  .edge-light{top:60%;width:95vw}
+  .content{width:calc(100% - 36px);padding-bottom:max(7vh,42px)}
+  .cta{width:100%;min-height:62px;font-size:13px;letter-spacing:.12em}
+  .grain-line{left:6%;top:10%;height:17vh}
+}
+@media(max-height:650px) and (max-width:520px){
+  .sculpture{width:88vw;height:88vw;top:40%}
+  .platform{top:66%;height:15vh}
+  .content{padding-bottom:24px}
+  .cta{min-height:56px}
+}
+@media(prefers-reduced-motion:reduce){.cta{transition:none}}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1399310622039113');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1399310622039113&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<main class="stage">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="horizon" aria-hidden="true"></div>
+  <div class="grain-line" aria-hidden="true"></div>
+  <div class="sculpture" aria-hidden="true">
+    <svg viewBox="0 0 700 700" role="presentation">
+      <defs>
+        <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f4c6a6"/>
+          <stop offset=".23" stop-color="#d97850"/>
+          <stop offset=".48" stop-color="#7e453d"/>
+          <stop offset=".7" stop-color="#2c7377"/>
+          <stop offset="1" stop-color="#a9c6c0"/>
+        </linearGradient>
+        <linearGradient id="side" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#101e24"/>
+          <stop offset=".5" stop-color="#42666a"/>
+          <stop offset="1" stop-color="#10191f"/>
+        </linearGradient>
+        <filter id="soft"><feGaussianBlur stdDeviation="5"/></filter>
+      </defs>
+      <path d="M350 55 C520 85 618 224 563 357 C520 461 390 483 280 430 C174 379 112 445 145 541 C174 625 310 650 431 588"
+        fill="none" stroke="#d77b55" stroke-width="62" stroke-linecap="round" opacity=".18" filter="url(#soft)"/>
+      <path d="M350 55 C520 85 618 224 563 357 C520 461 390 483 280 430 C174 379 112 445 145 541 C174 625 310 650 431 588"
+        fill="none" stroke="url(#side)" stroke-width="76" stroke-linecap="butt" />
+      <path d="M350 55 C520 85 618 224 563 357 C520 461 390 483 280 430 C174 379 112 445 145 541 C174 625 310 650 431 588"
+        fill="none" stroke="url(#ribbon)" stroke-width="48" stroke-linecap="butt"/>
+      <path d="M350 55 C520 85 618 224 563 357 C520 461 390 483 280 430 C174 379 112 445 145 541 C174 625 310 650 431 588"
+        fill="none" stroke="rgba(255,255,255,.42)" stroke-width="1.5" stroke-linecap="butt" stroke-dasharray="3 7"/>
+      <path d="M350 55 C520 85 618 224 563 357 C520 461 390 483 280 430 C174 379 112 445 145 541 C174 625 310 650 431 588"
+        fill="none" stroke="rgba(5,18,23,.55)" stroke-width="2" stroke-linecap="butt" transform="translate(0 8)"/>
+    </svg>
+  </div>
+  <div class="reflection" aria-hidden="true"></div>
+  <div class="platform" aria-hidden="true"></div>
+  <div class="edge-light" aria-hidden="true"></div>
+  <div class="content">
+    <a class="cta" href="https://t.me/+r-V-K0lUnZRlYWVi" target="_blank" rel="noopener noreferrer" aria-label="Oyuna daxil ol">
+      <span>OYUNA DAXİL OL</span><span class="arrow">↗</span>
+    </a>
+  </div>
+</main>
+<script>
+document.querySelector('.cta').addEventListener('click',function(){
+  if(typeof fbq==='function'){
+    fbq('track','Contact',{content_name:'Azerbaijan Telegram join button'});
+  }
+});
+</script>
+</body>
+</html>
